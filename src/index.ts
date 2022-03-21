@@ -1,7 +1,8 @@
 import { Loader } from "@googlemaps/js-api-loader"
+import "./style.css";
 
 const loader = new Loader({
-  apiKey: "",
+  apiKey: process.env.GOOGLE_API_KEY,
   version: "weekly",
 });
 

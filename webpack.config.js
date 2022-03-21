@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.ts',
@@ -10,12 +11,15 @@ module.exports = {
         templateContent: `
     <html>
       <body>
-      <h1>hello world</h1>
       <div id="map"></div>
       </body>
     </html>
   `
     }),
+    new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
+        GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
+      }),
   ],
   module: {
     rules: [
@@ -23,6 +27,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
