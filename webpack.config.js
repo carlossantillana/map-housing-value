@@ -5,6 +5,10 @@ const webpack = require('webpack')
 module.exports = {
   entry: './src/index.ts',
   devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    hot: true,
+  },
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
